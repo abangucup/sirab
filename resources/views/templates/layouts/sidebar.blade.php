@@ -1,0 +1,50 @@
+<!-- BEGIN: Main Menu-->
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow " data-scroll-to-active="true"
+    data-img="{{ asset('assets/images/backgrounds/02.jpg') }}">
+    <div class="navbar-header d-flex justify-content-center bg-gradient-x-purple-blue">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto">
+                <a class="navbar-brand text-white" href="{{ route('dashboard.'.$user->role->level_role) }}">
+                    <img class="brand-logo" alt="Chameleon admin logo"
+                        src="{{ $user->instansi->status == 'puskesmas' ? asset('assets/images/logo/ico/logo_puskesmas.ico') : asset('assets/images/logo/ico/logo_kota.ico') }}" />
+                    <span class="brand-text">Pelaporan Rabies</span>
+                </a>
+            </li>
+            <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
+        </ul>
+    </div>
+    <div class="navbar-header d-flex justify-content-center bg-gradient-x-purple-blue">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto">
+                <a class="navbar-brand text-white" href="{{ route('dashboard.'.$user->role->level_role) }}">
+                    <i class="ft-user"></i>
+                    <span class="menu-title">{{ $user->role->level_role }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="navigation-background"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="{{ Request::is('*/dashboard') ? 'open' : '' }} nav-item"><a
+                    href="{{ route('dashboard.'.$user->role->level_role) }}"><i class="ft-home"></i><span
+                        class="menu-title" data-i18n="">Dashboard</span></a>
+            </li>
+
+            {{-- Role Admin --}}
+            @if ($user->role->level_role === 'admin')
+            <li class="{{ Request::is('*/instansi') ? 'open' : '' }} nav-item"><a
+                    href="{{ route('instansi.index') }}"><i class="ft-briefcase"></i><span class="menu-title"
+                        data-i18n="">Instansi</span></a>
+            </li>
+
+            <li class="{{ Request::is('*/pengguna') ? 'open' : '' }} nav-item"><a
+                    href="{{ route('pengguna.index') }}"><i class="ft-user"></i><span class="menu-title"
+                        data-i18n="">Pengguna Sistem</span></a>
+            </li>
+
+            @endif
+        </ul>
+    </div>
+</div>
+<!-- END: Main Menu-->
