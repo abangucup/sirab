@@ -17,7 +17,6 @@ class BiodataSeeder extends Seeder
     {
         Biodata::create([
             'nama_lengkap' => 'Suci',
-            'nik' => '111111',
             'alamat' => 'Bonebolango',
             'telepon' => '082111111',
             'jenis_kelamin' => 'p',

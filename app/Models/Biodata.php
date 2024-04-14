@@ -10,16 +10,22 @@ class Biodata extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nik',
         'nama_lengkap',
         'telepon',
         'alamat',
         'jenis_kelamin',
+        'tanggal_lahir',
+        'umur',
         'foto'
     ];
 
     public function user()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function korban()
+    {
+        return $this->hasOne(KorbanRabies::class);
     }
 }

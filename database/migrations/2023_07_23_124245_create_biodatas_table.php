@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
-            $table->string('nik')->unique();
             $table->string('nama_lengkap');
             $table->string('telepon')->nullable();
             $table->string('alamat')->nullable();
             $table->enum('jenis_kelamin', ['p', 'l']);
+            $table->date('tanggal_lahir')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
         });

@@ -5,16 +5,16 @@
 @section('content')
 <div class="card border-grey mb-2">
     <div class="card-header border-0">
-        <div class="text-center mb-1">
-            <img src="{{ asset('assets/images/logo/ico/logo_kota.ico') }}" style="width: 30%" alt="branding logo">
-            <img src="{{ asset('assets/images/logo/ico/logo_p2pl.ico') }}" style="width: 30%" alt="branding logo">
+        <div class="text-center">
+            {{-- <img src="{{ asset('assets/images/logo/ico/logo_kota.ico') }}" style="width: 25%" alt="branding logo">
+            <img src="{{ asset('assets/images/logo/ico/logo_p2pl.ico') }}" style="width: 25%" alt="branding logo"> --}}
+            <img src="{{ asset('assets/images/logo/png/logo_kesehatan.png') }}" style="width: 25%" alt="branding logo">
         </div>
         <div class="font-large-1  text-center">
             Halaman Login
         </div>
     </div>
     <div class="card-content">
-
         <div class="card-body">
             <form action="{{ route('login') }}" method="POST">
                 @csrf
@@ -37,13 +37,13 @@
                         <i class="ft-eye"></i>
                     </div>
                 </fieldset>
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <div class="col-md-6 col-12 text-center text-sm-left">
 
                     </div>
                     <div class="col-md-6 col-12 float-sm-left text-center text-sm-right"><a href="recover-password.html"
                             class="card-link">Lupa Password?</a></div>
-                </div>
+                </div> --}}
                 <div class="form-group text-center">
                     <button type="submit"
                         class="btn btn-block btn-glow btn-bg-gradient-x-purple-blue col-12 mr-1 mb-1">Login</button>
@@ -56,7 +56,6 @@
 
 @push('style')
 <style>
-    /* Ganti kursor menjadi pointer saat mengarahkan ke ikon "eye" */
     .form-control-show-password {
         position: absolute;
         right: 5px;

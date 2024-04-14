@@ -2,37 +2,66 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instansi;
+use App\Models\JadwalPelayanan;
+use App\Models\Pengaduan;
+use App\Models\Petugas;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function admin()
     {
-        return view('halaman_admin.dashboard');
+        $totalPuskesmas = Instansi::where('status', 'puskesmas')->count();
+        $totalDinas = Instansi::where('status', 'dinas')->count();
+        $totalUser = User::count();
+        $totalSemuaJadwal = JadwalPelayanan::count();
+        $totalPengaduan = Pengaduan::count();
+
+        return view('halaman_admin.dashboard', compact([
+            'totalPuskesmas',
+            'totalDinas',
+            'totalUser',
+            'totalSemuaJadwal',
+            'totalPengaduan',
+        ]));
     }
 
-    public function dinkes()
+    public function dinkeskota()
     {
-        return view('halaman_dinkes.dashboard');
+        $totalJadwal = JadwalPelayanan::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
+        $totalPetugas = Petugas::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
+        $totalPengaduan = Pengaduan::count();
+        return view('halaman_dinkes_kota.dashboard', compact([
+            'totalJadwal',
+            'totalPetugas',
+            'totalPengaduan',
+        ]));
+    }
+
+    public function dinkesprov()
+    {
+        $totalJadwal = JadwalPelayanan::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
+        $totalPetugas = Petugas::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
+        $totalPengaduan = Pengaduan::count();
+        return view('halaman_dinkes_prov.dashboard', compact([
+            'totalJadwal',
+            'totalPetugas',
+            'totalPengaduan',
+        ]));
     }
 
     public function puskes()
     {
-        return view('halaman_puskes.dashboard');
-    }
-
-    public function kabid()
-    {
-        return view('halaman_kabid.dashboard');
-    }
-
-    public function kapus()
-    {
-        return view('halaman_kapus.dashboard');
-    }
-
-    public function kadis()
-    {
-        return view('halaman_kadis.dashboard');
+        $totalJadwal = JadwalPelayanan::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
+        $totalPetugas = Petugas::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
+        $totalPengaduan = Pengaduan::count();
+        return view('halaman_puskes.dashboard', compact([
+            'totalJadwal',
+            'totalPetugas',
+            'totalPengaduan',
+        ]));
     }
 }

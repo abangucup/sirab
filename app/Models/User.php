@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
         'role_id',
         'biodata_id',
-        'instansi_id',
+        // 'instansi_id',
     ];
 
     /**
@@ -55,8 +55,13 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function instansi()
+    public function petugas()
     {
-        return $this->belongsTo(Instansi::class);
+        return $this->hasOne(Petugas::class);
+    }
+
+    public function pengaduan()
+    {
+        return $this->hasMany(Pengaduan::class);
     }
 }

@@ -2,9 +2,8 @@
     <div class="row">
         <p class="text-muted text-center col-12 py-1 white">
             © <span class="year"></span>
-            <a href="https://www.linkedin.com/in/salman-mustapa-0b4997284/" class="white text-bold-700">SIRAB
-                Development By
-                Salman Mustapa, S.Kom</a>
+            <a href="https://www.linkedin.com/in/salman-mustapa-0b4997284/" class="white text-bold-700">SIRAB - 
+                Support By Dinas Kesehatan</a>
             <i class="ft-heart white"> </i>
         </p>
 

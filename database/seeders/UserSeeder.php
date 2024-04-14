@@ -17,11 +17,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'username' => 'admin',
+            'username' => 'super.admin',
             'password' => Hash::make('password'),
             'role_id' => 1,
             'biodata_id' => 1,
-            'instansi_id' => 11,
         ]);
     }
 }

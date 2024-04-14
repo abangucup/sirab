@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('kode_instansi');
             $table->string('alamat_instansi')->nullable();
             $table->enum('status', ['dinas', 'puskesmas']);
-            $table->foreignId('kecamatan_id')->constrained()->onDelete('cascade');
+            $table->foreignId('kecamatan_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -25,10 +25,10 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer([
-            'templates.app',
+            '*',
         ], function ($view) {
             $user = auth()->user();
-
+            
             $view->with([
                 'user' => $user
             ]);

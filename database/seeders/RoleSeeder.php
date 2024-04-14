@@ -19,33 +19,28 @@ class RoleSeeder extends Seeder
             [
                 // 1
                 'nama_role' => 'Administrator',
-                'level_role' => 'admin',
+                'level_role' => 'super_admin',
             ],
             [
                 // 2
-                'nama_role' => 'Kepala Dinas',
-                'level_role' => 'kadis',
-            ],
-            [
-                // 3
-                'nama_role' => 'Kepala Puskesmas',
-                'level_role' => 'kapus',
-            ],
-            [
-                // 4
-                'nama_role' => 'Kepala Bidang',
-                'level_role' => 'kabid',
-            ],
-            [
-                // 5
-                'nama_role' => 'Pengelola Program',
+                'nama_role' => 'Penanggung Jawab Puskesmas',
                 'level_role' => 'pj_puskes',
             ],
             [
-                // 6
-                'nama_role' => 'Penganggung Jawab Program',
-                'level_role' => 'pj_dinkes',
+                // 3
+                'nama_role' => 'Penganggung Jawab Dinas Kesehatan Kota',
+                'level_role' => 'pj_dinkes_kota',
             ],
+            [
+                // 4
+                'nama_role' => 'Penganggung Jawab Dinas Kesehatan Provinsi',
+                'level_role' => 'pj_dinkes_prov',
+            ],
+            [
+                // 5
+                'nama_role' => 'Pasien',
+                'level_role' => 'pasien',
+            ]
         ];
 
         foreach ($roles as $role) {

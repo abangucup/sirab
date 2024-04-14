@@ -5,7 +5,7 @@
 @section('content')
 
 <section id="file-export">
-    <div class="row">
+    <div class="row mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -31,51 +31,54 @@
                 <div class="card-content collapse show">
                     <div class="card-body card-dashboard">
                         <div class="table-responsive">
-                            <button class="btn btn-primary float-left mb-2" data-toggle="modal"
+                            <button class="btn btn-primary float-right mx-1" data-toggle="modal"
                                 data-target="#modalTambah"><i class="ft-user-plus mr-1"></i>Tambah
                                 Pengguna</button>
                             @include('halaman_admin.pengguna.modal_tambah')
-
-                            <table class="table text-dark font-weight-bold">
+                            <table class="table table-borderless table-striped file-export text-dark font-weight-bold">
                                 <thead class="bg-secondary text-white text-center">
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Lengkap</th>
-                                        <th>NIK</th>
+                                        <th>Username</th>
+                                        <th>Role Name</th>
+                                        <th>Role Level</th>
                                         <th>No. Handphone</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Alamat</th>
-                                        <th>Instansi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
-                                    <tr>
+                                    @foreach ($users as $pengguna)
+                                    <tr class="text-center">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $user->biodata->nama_lengkap }}</td>
-                                        <td>{{ $user->biodata->nik }}</td>
-                                        <td>{{ $user->biodata->telepon }}</td>
-                                        <td>{{ $user->biodata->jenis_kelamin == 'p' ? 'Perempuan' : 'Laki-Laki' }}</td>
-                                        <td>{{ $user->biodata->alamat }}</td>
-                                        <td>{{ $user->instansi->nama_instansi }}</td>
+                                        <td>{{ $pengguna->biodata->nama_lengkap }}</td>
+                                        <td>{{ $pengguna->username }}</td>
+                                        <td>{{ $pengguna->role->nama_role }}</td>
+                                        <td>{{ $pengguna->role->level_role }}</td>
+                                        <td>{{ $pengguna->biodata->telepon }}</td>
                                         <td>
-                                            <button class="btn btn-outline-danger  rounded-pill">Hapus</button>
-                                            <button class="btn btn-outline-info  rounded-pill">Ubah</button>
-                                            <button class="btn btn-success  rounded-pill">Detail</button>
+                                            <div class="d-flex justify-content-center">
+                                                <button class="btn btn-outline-warning" data-toggle="modal"
+                                                    data-target="#modalUbah-{{ $pengguna->id }}"><i
+                                                        class="ft-edit"></i></button>
+                                                <button class="btn btn-outline-danger mx-1" data-toggle="modal"
+                                                    data-target="#modalHapus-{{ $pengguna->id }}"><i
+                                                        class="ft-trash-2"></i></button>
+                                            </div>
                                         </td>
                                     </tr>
+                                    @include('halaman_admin.pengguna.modal_edit')
+                                    @include('halaman_admin.pengguna.modal_hapus')
                                     @endforeach
                                 </tbody>
                                 <tfoot class="bg-secondary text-white text-center">
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Lengkap</th>
-                                        <th>NIK</th>
+                                        <th>Username</th>
+                                        <th>Role Name</th>
+                                        <th>Role Level</th>
                                         <th>No. Handphone</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Alamat</th>
-                                        <th>Instansi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -88,3 +91,17 @@
     </div>
 </section>
 @endsection
+
+@push('style')
+
+<style>
+    .form-control-show-password {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        padding-right: 10px;
+    }
+</style>
+@endpush

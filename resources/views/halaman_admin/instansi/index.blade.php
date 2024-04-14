@@ -31,42 +31,60 @@
                 <div class="card-content collapse show">
                     <div class="card-body card-dashboard">
                         <div class="table-responsive">
+                                <button class="btn btn-primary float-right mx-1" data-toggle="modal"
+                                    data-target="#modalTambah"><i class="ft-user-plus mr-1"></i>Tambah
+                                    Instansi</button>
+                                @include('halaman_admin.instansi.modal_tambah')
+                                <table
+                                    class="table table-borderless table-striped file-export text-dark font-weight-bold">
+                                    <thead class="bg-secondary text-white text-center">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Instansi</th>
+                                            <th>Kode Instansi</th>
+                                            <th>Kecamatan</th>
+                                            <th>Alamat</th>
+                                            <th>Ket</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($instansis as $instansi)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td class="text-nowrap">{{ $instansi->nama_instansi }}</td>
+                                            <td>{{ $instansi->kode_instansi }}</td>
+                                            <td>{{ $instansi->kecamatan->nama_kecamatan }}</td>
+                                            <td>{{ $instansi->alamat_instansi }}</td>
+                                            <td>{{ Str::ucfirst($instansi->status) }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <button class="btn btn-outline-warning" data-toggle="modal"
+                                                        data-target="#modalUbah-{{ $instansi->id }}"><i
+                                                            class="ft-edit"></i></button>
+                                                    <button class="btn btn-outline-danger mx-1" data-toggle="modal"
+                                                    data-target="#modalHapus-{{ $instansi->id }}"><i
+                                                            class="ft-trash-2"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-                            <table class="table table-borderless table-striped file-export text-dark font-weight-bold">
-                                <thead class="bg-secondary text-white text-center">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Instansi</th>
-                                        <th>Kode Instansi</th>
-                                        <th>Kecamatan</th>
-                                        <th>Alamat</th>
-                                        <th>Ket</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($instansis as $instansi)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td class="text-nowrap">{{ $instansi->nama_instansi }}</td>
-                                        <td>{{ $instansi->kode_instansi }}</td>
-                                        <td>{{ $instansi->kecamatan->nama_kecamatan }}</td>
-                                        <td>{{ $instansi->alamat_instansi }}</td>
-                                        <td>{{ Str::ucfirst($instansi->status) }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot class="bg-secondary text-white text-center">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Instansi</th>
-                                        <th>Kode Instansi</th>
-                                        <th>Kecamatan</th>
-                                        <th>Alamat</th>
-                                        <th>Ket</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                            {{-- {{ $instansis->links() }} --}}
+                                        @include('halaman_admin.instansi.modal_edit')
+                                        @include('halaman_admin.instansi.modal_hapus')
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot class="bg-secondary text-white text-center">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Instansi</th>
+                                            <th>Kode Instansi</th>
+                                            <th>Kecamatan</th>
+                                            <th>Alamat</th>
+                                            <th>Ket</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                         </div>
                     </div>
                 </div>

@@ -19,12 +19,16 @@
                                     src="{{ $user->biodata->foto != null ? asset($user->biodata->foto) : ($user->biodata->jenis_kelamin == 'p' ? asset('assets/images/logo/svg/female.svg') : asset('assets/images/logo/svg/male.svg')) }}"
                                     alt="avatar"></span></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <div class="arrow_box_right"><a class="dropdown-item"
-                                    href="{{ route('dashboard.'.$user->role->level_role) }}"><span
-                                        class="avatar avatar-online"><img class="bg-white"
+                            <div class="arrow_box_right" style="width: 300px">
+                                <a class="dropdown-item" href="{{ route('dashboard.'.$user->role->level_role) }}">
+                                    <span class="avatar avatar-online">
+                                        <img class="bg-white"
                                             src="{{ $user->biodata->foto != null ? asset($user->biodata->foto) : ($user->biodata->jenis_kelamin == 'p' ? asset('assets/images/logo/svg/female.svg') : asset('assets/images/logo/svg/male.svg')) }}"
-                                            alt="avatar"><span class="user-name text-bold-700 ml-1">{{
-                                            $user->biodata->nama_lengkap }}</span></span></a>
+                                            alt="avatar">
+                                        <span class="user-name text-bold-700 ml-1">{{ $user->biodata->nama_lengkap
+                                            }}</span>
+                                    </span>
+                                </a>
 
                                 <div class="dropdown-divider"></div><a class="dropdown-item"
                                     href="{{ route('logout') }}"><i class="ft-power"></i> Logout</a>

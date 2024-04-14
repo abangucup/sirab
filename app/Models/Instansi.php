@@ -17,13 +17,14 @@ class Instansi extends Model
         'kecamatan_id',
     ];
 
-    public function users()
+    public function petugas()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Petugas::class);
     }
 
     public function kecamatan()
     {
         return $this->belongsTo(Kecamatan::class);
     }
+
 }

@@ -20,6 +20,8 @@
 <!-- BEGIN: Page JS-->
 <script src="{{ asset('assets/js/scripts/pages/dashboard-analytics.min.js') }}" type="text/javascript">
 </script>
+<script src="{{ asset('assets/vendors/js/forms/tags/form-field.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/scripts/forms/custom-file-input.min.js') }}"></script>
 <!-- END: Page JS-->
 
 {{-- FOR EXPORT --}}
@@ -35,3 +37,20 @@
 <script src="{{ asset('assets/js/scripts/tables/datatables/datatable-advanced.min.js') }}" type="text/javascript">
 </script>
 {{-- END --}}
+
+<script>
+    $(document).ready(function() {
+        $('#showPassword').click(function() {
+            const passwordInput = $('#inputPassword');
+            const passwordFieldType = passwordInput.attr('type');
+
+            if (passwordFieldType === 'password') {
+                passwordInput.attr('type', 'text');
+                $('#showPassword i').removeClass('ft-eye').addClass('ft-eye-off');
+            } else {
+                passwordInput.attr('type', 'password');
+                $('#showPassword i').removeClass('ft-eye-off').addClass('ft-eye');
+            }
+        });
+    });
+</script>

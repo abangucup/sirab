@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->foreignId('biodata_id')->constrained()->onDelete('cascade');
-            $table->foreignId('instansi_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('instansi_id')->nullable()->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });

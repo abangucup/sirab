@@ -25,19 +25,17 @@ class AuthController extends Controller
         if (Auth::attempt($kredensial)) {
             $role = auth()->user()->role->level_role;
 
-            if ($role === 'admin') {
+            if ($role === 'super_admin') {
                 Alert::toast('Berhasil Login', 'success');
-                return redirect()->route('dashboard.admin');
-            } elseif ($role == 'pj_dinkes') {
-                return redirect()->route('dashboard.pj_dinkes');
+                return redirect()->route('dashboard.super_admin');
+            } elseif ($role == 'pj_dinkes_prov') {
+                return redirect()->route('dashboard.pj_dinkes_prov');
+            } elseif ($role == 'pj_dinkes_kota') {
+                return redirect()->route('dashboard.pj_dinkes_kota');
             } elseif ($role == 'pj_puskes') {
                 return redirect()->route('dashboard.pj_puskes');
-            } elseif ($role == 'kabid') {
-                return redirect()->route('dashboard.kabid');
-            } elseif ($role == 'kapus') {
-                return redirect()->route('dashboard.kapus');
             } else {
-                return redirect()->route('dashboard.kadis');
+                return 'Akun tidak ditemukan';
             }
 
             Alert::toast('Berhasil Login', 'success');
