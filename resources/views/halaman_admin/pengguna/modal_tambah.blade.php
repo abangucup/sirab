@@ -77,7 +77,7 @@
                                     <i class="ft-eye"></i>
                                 </div>
                             </fieldset>
-                            <label>Level Pengguna: </label>
+                            <label>Level Pengguna : </label>
                             <div class="form-group position-relative has-icon-left">
                                 <select name="role" class="form-control" required>
                                     <option value="">-- Pilih --</option>

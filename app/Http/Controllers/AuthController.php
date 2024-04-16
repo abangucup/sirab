@@ -35,7 +35,7 @@ class AuthController extends Controller
             } elseif ($role == 'pj_puskes') {
                 return redirect()->route('dashboard.pj_puskes');
             } else {
-                return 'Akun tidak ditemukan';
+                return redirect()->route('dashboard.pasien');
             }
 
             Alert::toast('Berhasil Login', 'success');

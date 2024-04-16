@@ -27,4 +27,9 @@ class Instansi extends Model
         return $this->belongsTo(Kecamatan::class);
     }
 
+    public function jadwals()
+    {
+        return $this->hasMany(JadwalPelayanan::class);
+    }
+
 }

@@ -24,8 +24,8 @@ class Biodata extends Model
         return $this->hasOne(User::class);
     }
 
-    public function korban()
+    public function pasien()
     {
-        return $this->hasOne(KorbanRabies::class);
+        return $this->hasOne(Pasien::class);
     }
 }

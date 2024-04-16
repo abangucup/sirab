@@ -7,6 +7,7 @@ use App\Http\Controllers\InstansiController;
 use App\Http\Controllers\JadwalPelayananController;
 use App\Http\Controllers\KabkotController;
 use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PetugasController;
@@ -14,10 +15,15 @@ use App\Http\Controllers\ProvinsiController;
 use App\Http\Controllers\TanggapanController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+// Route::get('/', function () {
+//     return redirect()->route('login');
+// });
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/', [HomeController::class, 'search']);
+Route::get('/list-jadwal-pelayanan', [HomeController::class, 'listJadwal'])->name('list.jadwal');
+Route::get('/list-pengaduan', [HomeController::class, 'listPengaduan'])->name('list.pengaduan');
+Route::post('/list-pengaduan', [HomeController::class, 'storePengaduan']);
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -51,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'puskes'])->name('dashboard.pj_puskes');
     });
 
-    // CRUD JADWAL PELAYANAN
+    // CRUD PETUGAS PELAYANAN
     Route::resource('petugas', PetugasController::class);
 
     // CRUD JADWAL PELAYANAN
@@ -62,6 +68,16 @@ Route::middleware(['auth'])->group(function () {
 
     // FITUR TANGGAPAN
     Route::resource('tanggapan', TanggapanController::class);
+
+    // IMUNISASI
+    Route::resource('pasien', PasienController::class);
+    // Route::resource('imunisasi', IMunisacon)
+
+    // DAHSBOARD PASIEN
+    Route::group(['middleware' => ['role:pasien'], 'prefix' => 'dashboard'], function () {
+        Route::get('/pasien', [DashboardController::class, 'pasien'])->name('dashboard.pasien');
+        Route::get('/pengaduan-saya', [HomeController::class, 'pengaduanSaya'])->name('pengaduan.saya');
+    });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

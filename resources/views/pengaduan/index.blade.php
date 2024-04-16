@@ -42,18 +42,18 @@
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
                                     @foreach ($pengaduans as $pengaduan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td class="text-nowrap">{{ $pengaduan->pengadu->nama_lengkap }}</td>
+                                        <td class="text-nowrap">{{ $pengaduan->pengadu->biodata->nama_lengkap }}</td>
                                         <td>{{ $pengaduan->judul_pengaduan }}</td>
                                         <td>{{ Str::limit($pengaduan->isi_pengaduan, 50, '...') }}</td>
                                         <td>
                                             <div class="badge badge-{{ $pengaduan->status == 'pending' ? 'danger' : ($pengaduan->status == 'proses' ? 'warning' : 'success') }}">{{ $pengaduan->status }}</div>
                                         </td>
                                         <td>
-                                            <div class="d-flex">
+                                            <div class="d-flex justify-content-center align-items-center">
                                                 <a href="{{ route('pengaduan.show', $pengaduan->id) }}" class="btn btn-outline-info">
                                                     <i class="ft-info"></i>
                                                 </a>

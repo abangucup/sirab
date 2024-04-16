@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imunisasi;
 use App\Models\Instansi;
 use App\Models\JadwalPelayanan;
+use App\Models\Kunjungan;
+use App\Models\Pasien;
 use App\Models\Pengaduan;
 use App\Models\Petugas;
 use App\Models\User;
@@ -63,5 +66,15 @@ class DashboardController extends Controller
             'totalPetugas',
             'totalPengaduan',
         ]));
+    }
+
+    public function pasien()
+    {
+        $pasien = Auth::user()->biodata->pasien;
+        $kunjungans = Kunjungan::where('pasien_id', $pasien->id)->get();
+        $imunisasis = Imunisasi::whereHas('kunjungan', function($query) use ($pasien) {   
+                                    $query->where('pasien_id', $pasien->id);
+                                })->get();
+        return view('home.dashboard.index', compact('kunjungans', 'imunisasis'));
     }
 }

@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Biodata;
 use App\Models\Instansi;
+use App\Models\Pasien;
 use App\Models\Petugas;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class PenggunaController extends Controller
 {
@@ -69,7 +72,16 @@ class PenggunaController extends Controller
         $user->role_id = $request->role;
         $user->save();
 
-        if ($request->role != '1') {
+        
+        if ($request->role !== '1') {
+            if ($request->role == '5') {
+                $pasien = new Pasien();
+                $pasien->nomor_register = Str::upper($biodata->id.substr(Str::slug($biodata->nama_lengkap), 0, 4).Carbon::now()->day.Carbon::now()->month.Carbon::now()->year);
+                $pasien->biodata_id = $biodata->id;
+                $pasien->save();
+             } else {
+
+
             if ($request->instansi == null) {
                 $biodata->delete();
                 Alert::toast('Selain Admin dan Pasien maka instansi harus dipilih', 'error');
@@ -80,6 +92,8 @@ class PenggunaController extends Controller
                 $petugas->instansi_id = $request->instansi;
                 $petugas->save();
             }
+        }
+
         }
 
         Alert::toast('Berhasil tambah data pengguna', 'success');
@@ -134,7 +148,7 @@ class PenggunaController extends Controller
             ]);
         }
 
-        if ($request->role != '1') {
+        if ($request->role !== '1' && $request->role !== '5') {
             if ($request->instansi == null) {
                 Alert::toast('Selain Admin dan Pasien maka instansi harus dipilih', 'error');
                 return redirect()->back();
@@ -170,8 +184,6 @@ class PenggunaController extends Controller
                 'password' => Hash::make($request->password),
             ]);
         }
-
-
 
         Alert::toast('Berhasil ubah data pengguna', 'success');
         return back();

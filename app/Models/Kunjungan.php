@@ -25,7 +25,7 @@ class Kunjungan extends Model
 
     public function kasus()
     {
-        return $this->belongsTo(Kasus::class);
+        return $this->belongsTo(Kasus::class, 'kasus_id');
     }
 
     public function puskes_kunjungan()

@@ -26,6 +26,11 @@ class Pasien extends Model
 
     public function kunjungans()
     {
-        return $this->hasManyThrough(Kunjungan::class, Kasus::class);
+        return $this->hasMany(Kunjungan::class);
+    }
+
+    public function imunisasis()
+    {
+        return $this->hasManyThrough(Imunisasi::class, Kunjungan::class);
     }
 }

@@ -9,6 +9,8 @@ class Imunisasi extends Model
 {
     use HasFactory;
 
+    protected $table = 'imunisasis';
+
     protected $fillable = [
         'kunjungan_id',
         'tanggal_pemberian_var1',
@@ -22,13 +24,9 @@ class Imunisasi extends Model
         'status_imunisasi',
     ];
 
-    public function pasien()
+    public function kunjungan()
     {
-        return $this->belongsTo(Pasien::class);
-    }
-    public function puskes_kunjungan()
-    {
-        return $this->belongsTo(Instansi::class, 'puskesmas_kunjungan');
+        return $this->belongsTo(Kunjungan::class);
     }
 
     public function puskes_pemberi_var1()

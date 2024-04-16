@@ -30,7 +30,8 @@ class PetugasController extends Controller
                                     })->get();
                 $dataPetugas = Petugas::whereHas('instansi', function ($query) {
                     $query->where('status', 'puskesmas');
-                })->get();
+                })
+                ->orWhere('instansi_id', Auth::user()->petugas->instansi_id)->get();
                 $roles = Role::where('level_role', 'pj_dinkes_kota')
                             ->orWhere('level_role', 'pj_puskes')->get();
             } elseif ($petugas->instansi->status == 'dinas' && $petugas->user->role->level_role == 'pj_dinkes_prov') {
@@ -42,8 +43,10 @@ class PetugasController extends Controller
                                         $query->where('instansi_id', Auth::user()->petugas->instansi_id);
                                     })->get();
                 $dataPetugas = Petugas::whereHas('instansi', function ($query) {
-                    $query->where('status', 'puskesmas');
-                })->get();
+                                            $query->where('status', 'puskesmas')
+                                                    ->orWhere('status', 'dinas');
+                                        })
+                                        ->orWhere('instansi_id', Auth::user()->petugas->instansi_id)->get();
                 $roles = Role::where('level_role', 'pj_dinkes_prov')
                             ->orWhere('level_role', 'pj_dinkes_kota')->get();
             } else {
@@ -63,7 +66,9 @@ class PetugasController extends Controller
         if (Auth::user()->role->level_role == 'super_admin') {
             $instansis = Instansi::all();
             $dataPetugas = Petugas::latest()->get();
-            $roles = Role::all();
+            $roles = Role::where('level_role', '!=', 'super_admin')
+                        ->where('level_role', '!=', 'pasien')
+                        ->get();
         }
 
         return view('petugas.index', compact('dataPetugas', 'instansis', 'roles'));

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tanggal_berkunjung')->nullable();
             $table->unsignedBigInteger('puskesmas_kunjungan');
             $table->enum('cuci_luka', ['Ya', 'Tidak'])->nullable();
-            $table->text('hasil_pemeriksaan');
+            $table->text('hasil_pemeriksaan')->nullable();
 
             $table->foreign('puskesmas_kunjungan')->references('id')->on('instansis');
 

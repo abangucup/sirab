@@ -27,7 +27,7 @@
   <div class="main-menu-content">
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
       <li class="{{ Request::is('*/dashboard') ? 'open' : '' }} nav-item"><a
-          href="{{ route('dashboard.'.$user->role->level_role) }}"><i class="ft-home"></i><span class="menu-title"
+          href="{{ route('dashboard.'.$user->role->level_role) }}"><i class="ft-airplay"></i><span class="menu-title"
             data-i18n="">Dashboard</span></a>
       </li>
 
@@ -75,6 +75,9 @@
         </ul>
       </li>
 
+      <li class="nav-item"><a href="{{ route('home') }}"><i
+            class="ft-home"></i><span class="menu-title" data-i18n="">Home</span></a>
+      </li>
 
     </ul>
   </div>

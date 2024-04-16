@@ -59,7 +59,6 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
-
                             <label>Username : </label>
                             <div class="form-group position-relative has-icon-left">
                                 <input type="text" placeholder="Username" class="form-control" name="username" required>

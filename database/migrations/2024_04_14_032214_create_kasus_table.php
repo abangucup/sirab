@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('hewan_rabies', ['Anjing', 'Kucing', 'Kera', 'DLL'])->nullable();
             $table->string('lokasi_gigitan')->nullable();
             $table->enum('kondisi', ['Sembuh', 'Mati', 'Sakit'])->nullable();
-            $table->text('gejala');
+            $table->text('gejala')->nullable();
             $table->timestamps();
         });
     }
