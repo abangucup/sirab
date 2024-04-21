@@ -6,11 +6,9 @@ use App\Models\Imunisasi;
 use App\Models\Instansi;
 use App\Models\JadwalPelayanan;
 use App\Models\Kunjungan;
-use App\Models\Pasien;
 use App\Models\Pengaduan;
 use App\Models\Petugas;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller

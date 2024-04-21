@@ -15,7 +15,6 @@ class Biodata extends Model
         'alamat',
         'jenis_kelamin',
         'tanggal_lahir',
-        'umur',
         'foto'
     ];
 
