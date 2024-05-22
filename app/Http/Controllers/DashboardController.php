@@ -6,6 +6,7 @@ use App\Models\Imunisasi;
 use App\Models\Instansi;
 use App\Models\JadwalPelayanan;
 use App\Models\Kunjungan;
+use App\Models\Pasien;
 use App\Models\Pengaduan;
 use App\Models\Petugas;
 use App\Models\User;
@@ -59,10 +60,12 @@ class DashboardController extends Controller
         $totalJadwal = JadwalPelayanan::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
         $totalPetugas = Petugas::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
         $totalPengaduan = Pengaduan::count();
+        $totalPasien = Pasien::count();
         return view('halaman_puskes.dashboard', compact([
             'totalJadwal',
             'totalPetugas',
             'totalPengaduan',
+            'totalPasien'
         ]));
     }
 
