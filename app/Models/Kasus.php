@@ -10,7 +10,7 @@ class Kasus extends Model
     use HasFactory;
 
     protected $table = 'kasus';
-    
+
     protected $fillable = [
         'pasien_id',
         'tanggal_gigitan',
@@ -27,7 +27,7 @@ class Kasus extends Model
 
     public function kunjungan()
     {
-        return $this->hasMany(Kunjungan::class);
+        return $this->hasOne(Kunjungan::class);
     }
 
     public function imunisasis()

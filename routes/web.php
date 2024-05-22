@@ -3,9 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\InstansiController;
 use App\Http\Controllers\JadwalPelayananController;
 use App\Http\Controllers\KabkotController;
+use App\Http\Controllers\KasusController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
@@ -69,9 +71,15 @@ Route::middleware(['auth'])->group(function () {
     // FITUR TANGGAPAN
     Route::resource('tanggapan', TanggapanController::class);
 
-    // IMUNISASI
+    // PASIEN
     Route::resource('pasien', PasienController::class);
-    // Route::resource('imunisasi', IMunisacon)
+    // KASUS PASIEN
+    Route::post('pasien/{pasien}/kasus', [KasusController::class, 'store'])->name('kasus.store');
+    Route::put('pasien/{pasien}/kasus/{kasus}', [KasusController::class, 'update'])->name('kasus.update');
+    Route::delete('pasien/{pasien}/kasus/{kasus}', [KasusController::class, 'destroy'])->name('kasus.destroy');
+
+    // IMUNISASI
+    Route::resource('imunisasi', ImunisasiController::class);
 
     // DAHSBOARD PASIEN
     Route::group(['middleware' => ['role:pasien'], 'prefix' => 'dashboard'], function () {

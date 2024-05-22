@@ -29,6 +29,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/dashboard-analytics.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/plugins/file-uploaders/dropzone.min.css') }}">
 
+{{-- FORM WIZARD --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/plugins/forms/wizard.min.css') }}">
 <!-- END: Page CSS-->
 
 <!-- BEGIN: Custom CSS-->

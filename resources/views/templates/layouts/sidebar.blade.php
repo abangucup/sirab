@@ -48,33 +48,26 @@
       </li>
 
       {{-- IMUNISASI --}}
-      <li class="nav-item has-sub"><a href="#"><i class="ft-map"></i><span class="menu-title"
-            data-i18n="">Imunisasi</span></a>
+      <li class="nav-item has-sub"><a href="#"><i class="ft-thermometer"></i><span class="menu-title" data-i18n="">Imunisasi</span></a>
         <ul class="menu-content" style="">
-          <li class="is-shown {{ Request::is('*/wilayah/provinsi') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('provinsi.index') }}">Provinsi</a>
+          <li class="is-shown {{ Request::is('imunisasi') ? 'active' : '' }}">
+            <a class="menu-item" href="{{ route('imunisasi.index') }}">Data Imunisasi</a>
           </li>
           <li class="is-shown {{ Request::is('*/wilayah/kabkot') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('kabkot.index') }}">Kabupaten</a>
-          </li>
-          <li class="is-shown {{ Request::is('*/wilayah/kecamatan') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('kecamatan.index') }}">Kecamatan</a>
+            <a class="menu-item" href="{{ route('kabkot.index') }}">Grafik Imunisasi</a>
           </li>
         </ul>
       </li>
 
       {{-- LAPORAN --}}
-      <li class="nav-item has-sub"><a href="#"><i class="ft-map"></i><span class="menu-title"
+      <li class="nav-item has-sub"><a href="#"><i class="ft-file-text"></i><span class="menu-title"
             data-i18n="">Laporan</span></a>
         <ul class="menu-content" style="">
           <li class="is-shown {{ Request::is('*/wilayah/provinsi') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('provinsi.index') }}">Provinsi</a>
+            <a class="menu-item" href="{{ route('provinsi.index') }}">Imunisasi</a>
           </li>
           <li class="is-shown {{ Request::is('*/wilayah/kabkot') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('kabkot.index') }}">Kabupaten</a>
-          </li>
-          <li class="is-shown {{ Request::is('*/wilayah/kecamatan') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('kecamatan.index') }}">Kecamatan</a>
+            <a class="menu-item" href="{{ route('kabkot.index') }}">Pemeriksaan</a>
           </li>
         </ul>
       </li>
@@ -87,7 +80,7 @@
           <li class="is-shown {{ Request::is('*/wilayah/provinsi') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('provinsi.index') }}">Provinsi</a>
           </li>
-          <li class="is-shown {{ Request::is('*/wilayah/kabkot') ? 'active' : '' }}">
+          <li class="is-shown {{ Request::is('*/wilayah/kab kot') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('kabkot.index') }}">Kabupaten</a>
           </li>
           <li class="is-shown {{ Request::is('*/wilayah/kecamatan') ? 'active' : '' }}">

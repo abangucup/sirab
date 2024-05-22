@@ -73,7 +73,7 @@ class PetugasController extends Controller
 
         return view('petugas.index', compact('dataPetugas', 'instansis', 'roles'));
     }
-
+    
     public function store(Request $request)
     {
         $validasi = Validator::make($request->all(), [

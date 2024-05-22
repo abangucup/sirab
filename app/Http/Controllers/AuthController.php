@@ -20,8 +20,6 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        // dd(Auth::attempt($kredensial));
-
         if (Auth::attempt($kredensial)) {
             $role = auth()->user()->role->level_role;
 

@@ -38,4 +38,3 @@ class Kunjungan extends Model
         return $this->hasMany(Imunisasi::class);
     }
 }
-

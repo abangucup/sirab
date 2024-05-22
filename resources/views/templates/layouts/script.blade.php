@@ -5,9 +5,11 @@
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="{{ asset('assets/vendors/js/charts/chartist.min.js') }}" type="text/javascript"></script>
+{{-- <script src="{{ asset('assets/vendors/js/charts/chartist.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/vendors/js/charts/chartist-plugin-tooltip.min.js') }}" type="text/javascript">
-</script>
+</script> --}}
+
+<script src="{{ asset('assets/vendors/js/forms/validation/jquery.validate.min.js') }}" type="text/javascript"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -18,10 +20,12 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="{{ asset('assets/js/scripts/pages/dashboard-analytics.min.js') }}" type="text/javascript">
-</script>
+{{-- <script src="{{ asset('assets/js/scripts/pages/dashboard-analytics.min.js') }}" type="text/javascript"></script> --}}
 <script src="{{ asset('assets/vendors/js/forms/tags/form-field.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/js/scripts/forms/custom-file-input.min.js') }}"></script>
+<script src="{{ asset('assets/js/scripts/forms/custom-file-input.min.js') }}"></script>
+
+{{-- <script src="{{ asset('assets/js/scripts/forms/wizard-steps.min.js') }}" type="text/javascript"></script> --}}
+
 <!-- END: Page JS-->
 
 {{-- FOR EXPORT --}}
