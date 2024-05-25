@@ -9,6 +9,7 @@ use App\Http\Controllers\JadwalPelayananController;
 use App\Http\Controllers\KabkotController;
 use App\Http\Controllers\KasusController;
 use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PenggunaController;
@@ -78,8 +79,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('pasien/{pasien}/kasus/{kasus}', [KasusController::class, 'update'])->name('kasus.update');
     Route::delete('pasien/{pasien}/kasus/{kasus}', [KasusController::class, 'destroy'])->name('kasus.destroy');
 
+    // KUNJUNGAN
+    Route::resource('kunjungan', KunjunganController::class);
+    Route::get('getKeluhanPasien/{pasien}', [KunjunganController::class, 'getKeluhanPasien'])->name('getKeluhanPasien');
     // IMUNISASI
-    Route::resource('imunisasi', ImunisasiController::class);
+    Route::resource('kunjungan/{kunjungan}/imunisasi', ImunisasiController::class);
 
     // DAHSBOARD PASIEN
     Route::group(['middleware' => ['role:pasien'], 'prefix' => 'dashboard'], function () {

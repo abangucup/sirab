@@ -50,8 +50,8 @@
       {{-- IMUNISASI --}}
       <li class="nav-item has-sub"><a href="#"><i class="ft-thermometer"></i><span class="menu-title" data-i18n="">Imunisasi</span></a>
         <ul class="menu-content" style="">
-          <li class="is-shown {{ Request::is('imunisasi') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('imunisasi.index') }}">Data Imunisasi</a>
+          <li class="is-shown {{ Request::is('kunjungan') ? 'active' : '' }}">
+            <a class="menu-item" href="{{ route('kunjungan.index') }}">Data Kunjungan</a>
           </li>
           <li class="is-shown {{ Request::is('*/wilayah/kabkot') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('kabkot.index') }}">Grafik Imunisasi</a>
