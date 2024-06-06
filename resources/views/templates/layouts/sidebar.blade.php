@@ -53,8 +53,8 @@
           <li class="is-shown {{ Request::is('kunjungan') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('kunjungan.index') }}">Data Kunjungan</a>
           </li>
-          <li class="is-shown {{ Request::is('*/wilayah/kabkot') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('kabkot.index') }}">Grafik Imunisasi</a>
+          <li class="is-shown {{ Request::is('grafik') ? 'active' : '' }}">
+            <a class="menu-item" href="{{ route('grafikImunisasi') }}">Grafik Imunisasi</a>
           </li>
         </ul>
       </li>

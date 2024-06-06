@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Biodata;
 use App\Models\Pengaduan;
+use App\Models\Tanggapan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +22,10 @@ class PengaduanController extends Controller
         return view('pengaduan.index', compact('pengaduans'));
     }
 
-    public function detailPengaduan(Pengaduan $pengaduan)
+    public function show(Pengaduan $pengaduan)
     {
-        return view('pengaduan.show', $pengaduan);
+        $tanggapans = Tanggapan::where('pengaduan_id', $pengaduan->id)->get();
+        return view('pengaduan.show', compact('pengaduan', 'tanggapans'));
     }
 
     public function store(Request $request)

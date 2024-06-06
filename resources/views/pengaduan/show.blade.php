@@ -1,94 +1,131 @@
 @extends('templates.app')
 
-@section('title', 'Instansi')
+@section('title', 'Pasien')
 
 @section('content')
 
-<section id="file-export">
+<section id="vertical-tabs">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">List Pengaduan</h4>
-                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                    <div class="heading-elements">
-                        <ul class="list-inline mb-0">
-                            <li>
-                                <a data-action="collapse"><i class="ft-minus"></i></a>
-                            </li>
-                            <li>
-                                <a data-action="reload"><i class="ft-rotate-cw"></i></a>
-                            </li>
-                            <li>
-                                <a data-action="expand"><i class="ft-maximize"></i></a>
-                            </li>
-                            <li>
-                                <a data-action="close"><i class="ft-x"></i></a>
-                            </li>
-                        </ul>
+                    <div class="d-flex justify-content-between">
+                        <h3>Detail Pengaduan</h3>
                     </div>
                 </div>
-                <div class="card-content collapse show">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <button class="btn btn-primary float-right mx-1" data-toggle="modal"
-                                data-target="#modalTambah"><i class="ft-user-plus mr-1"></i>Tambah
-                                Jadwal</button>
-                            @include('jadwal.modal_tambah')
-                            <table class="table table-borderless table-striped file-export text-dark font-weight-bold">
-                                <thead class="bg-secondary text-white text-center">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Pengadu</th>
-                                        <th>Judul Pengaduan</th>
-                                        <th>Isi Pengaduan</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($pengaduans as $pengaduan)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td class="text-nowrap">{{ $pengaduan->pengadu->nama_lengkap }}</td>
-                                        <td>{{ $pengaduan->judul_pengaduan }}</td>
-                                        <td>{{ Str::limit($pengaduan->isi_pengaduan, 50, '...') }}</td>
-                                        <td>
-                                            <div class="badge badge-{{ $pengaduan->status == 'pending' ? 'danger' : ($pengaduan->status == 'proses' ? 'warning' : 'success') }}">{{ $pengaduan->status }}</div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="{{ route('pengaduan.show', $pengaduan->id) }}" class="btn btn-outline-info">
-                                                    <i class="ft-info"></i>
-                                                </a>
-                                                <button class="btn btn-outline-warning" data-toggle="modal"
-                                                    data-target="#modalUbah-{{ $pengaduan->id }}"><i
-                                                        class="ft-edit"></i></button>
-                                                <button class="btn btn-outline-danger mx-1" data-toggle="modal"
-                                                    data-target="#modalHapus-{{ $pengaduan->id }}"><i
-                                                        class="ft-trash-2"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                <div class="card-body">
+                    <div class="row">
+                        {{-- BIODATA --}}
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-body">
+                                <h4 class="form-section">
+                                    <i class="ft-user"></i> Data Pengaduan
+                                </h4>
+                                <hr>
+                                <label>Nama Lengkap : </label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="text" class="form-control" disabled
+                                        value="{{ $pengaduan->pengadu->biodata->nama_lengkap }}">
+                                    <div class="form-control-position">
+                                        <i class="ft-user font-medium-5 line-height-1 text-muted icon-align"></i>
+                                    </div>
+                                </div>
+                                <label>Tanggal Lahir : </label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="text" class="form-control" disabled
+                                        value="{{ \Carbon\Carbon::parse($pengaduan->pengadu->biodata->tanggal_lahir)->isoFormat('LL') . ' - ( '.\Carbon\Carbon::parse($pengaduan->pengadu->biodata->tanggal_lahir)->age. ' Tahun )' }}">
+                                    <div class="form-control-position">
+                                        <i class="ft-calendar font-medium-5 line-height-1 text-muted icon-align"></i>
+                                    </div>
+                                </div>
+                                <label>Jenis Kelamin : </label>
+                                <div class="form-group position-relative has-icon-left">
+                                    <input type="text" class="form-control" disabled
+                                        value="{{ $pengaduan->pengadu->biodata->jenis_kelamin == 'l' ? 'Laki-Laki' : 'Perempuan' }}">
+                                    <div class="form-control-position">
+                                        <i class="ft-circle font-medium-5 line-height-1 text-muted icon-align"></i>
+                                    </div>
+                                </div>
+                                <label>Judul Pengaduan : </label>
+                                <div class="form-group position-relative">
+                                    <input type="text" class="form-control" disabled
+                                        value="{{ $pengaduan->judul_pengaduan }}">
+                                </div>
+                                <label>Isi Pengaduan : </label>
+                                <div class="form-group position-relative">
+                                    <textarea class="form-control" row="2"
+                                        disabled>{{ $pengaduan->isi_pengaduan }}</textarea>
+                                </div>
+                            </div>
 
-                                    @include('pengaduan.modal_edit')
-                                    @include('pengaduan.modal_hapus')
-                                    @endforeach
-                                </tbody>
-                                <tfoot class="bg-secondary text-white text-center">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Instansi</th>
-                                        <th>Jadwal</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
                         </div>
+                        {{-- END BIODATA --}}
+
+                        {{-- TANGGAPAN --}}
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-body">
+                                <h4 class="form-section">
+                                    <i class="ft-file"></i> Tanggapan
+                                </h4>
+                                <hr>
+                                <button class="btn btn-primary mb-1" data-toggle="modal"
+                                    data-target="#modalTambahTanggapan"><i class="ft-user-plus mr-1"></i>Tambah
+                                    Tanggapan</button>
+                                @include('pengaduan.tanggapan.modal_tambah')
+
+                                <table class="table table-borderless table-striped text-dark font-weight-bold">
+                                    <thead class="bg-secondary text-white text-center">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Puskesmas</th>
+                                            <th>Petugas</th>
+                                            <th>Tanggapan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        @forelse ($tanggapans as $tanggapan)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $tanggapan->petugas->instansi->nama_instansi }}</td>
+                                            <td>{{ $tanggapan->petugas->user->biodata->nama_lengkap }}</td>
+                                            <td>{{ $tanggapan->tanggapan }}</td>
+                                            {{-- <td>
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <button class="btn btn-outline-warning" data-toggle="modal"
+                                                        data-target="#modalUbahImunisasi-{{ $imunisasi->id }}"><i
+                                                            class="ft-edit"></i></button>
+                                                    <button class="btn btn-outline-danger mx-1" data-toggle="modal"
+                                                        data-target="#modalHapusImunisasi-{{ $imunisasi->id }}"><i
+                                                            class="ft-trash-2"></i></button>
+                                                </div>
+                                            </td> --}}
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">Belum ada data</td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                    <tfoot class="bg-secondary text-white text-center">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Puskesmas</th>
+                                            <th>Petugas</th>
+                                            <th>Tanggapan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+                        {{-- END TANGGAPAN --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 @endsection

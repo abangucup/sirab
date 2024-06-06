@@ -40,7 +40,7 @@
                             <div class="profile-img">
                                 <img src="{{ $user->biodata->foto ?? asset('assets/home/images/author-profile.png') }}" alt="icon" height="160px" width="160px">
                             </div>
-                            <h5>{{ $user->biodata->nama_lengkap }}</h5>
+                            <h5>{{ $user->biodata->nama_lengkap }} <br><span class="badge bg-primary">{{ $user->biodata->pasien->nomor_register }}</span></h5>
                             <a href="{{ route('logout') }}" class="cmn-btn alt">Logout</a>
                         </div>
                         @include('home.dashboard.sidebar')

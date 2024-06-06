@@ -47,14 +47,15 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" name="judul_pengaduan" id="judul_pengaduan"
-                                        placeholder="Masukan Judul Pengaduan / Laporan" required>
+                                        class="bg-white text-dark" placeholder="Masukan Judul Pengaduan / Laporan"
+                                        required>
                                 </div>
                                 <div class="form-group my-3">
                                     <label for="isi_pengaduan">Keterangan :
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <textarea name="isi_pengaduan" id="isi_pengaduan"
-                                        rows="5">Masukan Keterangan</textarea>
+                                    <textarea name="isi_pengaduan" id="isi_pengaduan" class="text-dark"
+                                        placeholder="Masukan isi Pengaduan" rows="5" required></textarea>
                                 </div>
                                 <button class="cmn-btn alt">Simpan</button>
                             </div>

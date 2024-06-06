@@ -36,7 +36,9 @@
     <div class="single-content">
         <div class="head-area d-flex justify-content-between align-items-center">
             <h5>{{ $pengaduan->judul_pengaduan }}</h5>
-            <span class="btn btn-sm btn-{{ $pengaduan->status == 'pending' ? 'danger' : ($pengaduan->status == 'proses' ? 'warning' : 'success') }}">{{ $pengaduan->status }}</span>
+            <span
+                class="badge bg-{{ $pengaduan->status == 'pending' ? 'danger' : ($pengaduan->status == 'proses' ? 'warning' : 'success') }}">{{
+                $pengaduan->status }}</span>
 
         </div>
         <div class="main-content">
@@ -45,11 +47,14 @@
         <hr class="text-white">
         <div class="footer-area mt-4">
             <h6>Tanggapan :</h6>
-            @foreach ($pengaduan->tanggapans as $tanggapan)
-                <p>{{ $tanggapan->petugas->user->biodata }}</p>
-                <p>{{ $tanggapan->tanggapan }}</p>
-
-            @endforeach
+            <br>
+                <span class="badge bg-primary text-wrap">
+                    @forelse ($pengaduan->tanggapans as $tanggapan)
+                    <p>{{ $tanggapan->tanggapan }}</p>
+                    @empty
+                    <p>Belum Ada Tanggapan</p>
+                    @endforelse
+                </span>
         </div>
     </div>
 </div>
@@ -74,8 +79,7 @@
                     <label for="isi_pengaduan">Keterangan :
                         <span class="text-danger">*</span>
                     </label>
-                    <textarea name="isi_pengaduan" id="isi_pengaduan"
-                        rows="5">Masukan Keterangan</textarea>
+                    <textarea name="isi_pengaduan" id="isi_pengaduan" rows="5">Masukan Keterangan</textarea>
                 </div>
                 <button class="cmn-btn alt">Simpan</button>
             </div>
@@ -86,7 +90,8 @@
 @endsection
 @push('style')
 <style>
-    .dashboard-section form input, textarea {
+    .dashboard-section form input,
+    textarea {
         border-color: transparent;
         border-radius: 10px;
         background-color: #242882;

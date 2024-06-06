@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GrafikController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\InstansiController;
@@ -84,6 +85,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('getKeluhanPasien/{pasien}', [KunjunganController::class, 'getKeluhanPasien'])->name('getKeluhanPasien');
     // IMUNISASI
     Route::resource('kunjungan/{kunjungan}/imunisasi', ImunisasiController::class);
+    // CETAK KARTU
+    Route::get('kunjungan/{kunjungan}/kartu-imunisasi', [KunjunganController::class, 'kartuImunisasi'])->name('kartuImunisasi');
+
+    // GRAFIK
+    Route::get('grafik-imunisasi', [GrafikController::class, 'grafikImunisasi'])->name('grafikImunisasi');
 
     // DAHSBOARD PASIEN
     Route::group(['middleware' => ['role:pasien'], 'prefix' => 'dashboard'], function () {

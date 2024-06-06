@@ -32,4 +32,9 @@ class Instansi extends Model
         return $this->hasMany(JadwalPelayanan::class);
     }
 
+    public function imunisasis()
+    {
+        return $this->hasMany(Imunisasi::class);
+    }
+
 }

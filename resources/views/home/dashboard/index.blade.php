@@ -50,7 +50,7 @@
                         @forelse ($kunjungans as $kunjungan)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $kunjugan->kasus->hewan_rabies }}</td>
+                            <td>{{ $kunjungan->kasus->hewan_rabies }}</td>
                             <td>{{ Carbon\Carbon::parse($kunjungan->tanggal_berkunjung)->isoFormat('LL') }}</td>
                             <td>{{ $kunjungan->puskes_kunjungan->nama_instansi }}</td>
                             <td>{{ $kunjungan->hasil_pemeriksaan }}</td>
@@ -82,13 +82,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($imunisasis as $imunisasi)
+                        @forelse ($dataKeluhan as $kasus)
                         <tr>
+                            {{-- <td>{{ $loop->iteration }}</td>
+                            <td>{{ 'Keluhan terjadi karena gigitan '.$imunisasi->kasus->hewan_rabies.' dengan lokasi gigitan '.$imunisasi->kasus->lokasi_gigitan.
+                                    ' Pada tanggal '.Carbon\Carbon::parse($imunisasi->kasus->tanggal_gigitan)->isoFormat('LL').' dengan gejala yang dialami adalah '.
+                                    $imunisasi->kasus->gejala. ' dan kondisi sekarang '.$imunisasi->kasus->kondisi
+                                }}
+                            </td>
+                            <td>{{ $imunisasi->status_imunisasi }}</td>
+                            <td>{{ Carbon\Carbon::parse($imunisasi->tanggal_pemberian_imunisasi)->isoFormat('LL') }}</td>
+                            <td>{{ $imunisasi->puskes_pemberi->nama_instansi }}</td>
+                            <td></td> --}}
                             <td>{{ $loop->iteration }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                {{ 'Keluhan terjadi karena gigitan '.$kasus->hewan_rabies.' dengan lokasi gigitan '.$kasus->lokasi_gigitan.
+                                    ' Pada tanggal '.Carbon\Carbon::parse($kasus->tanggal_gigitan)->isoFormat('LL').' dengan gejala yang dialami adalah '.
+                                    $kasus->gejala. ' dan kondisi sekarang '.$kasus->kondisi
+                                }}
+                            </td>
+                            <td>
+                                <ul>
+                                    @foreach ($kasus->imunisasis as $imunisasi)
+                                        <li>{{ $imunisasi->status_imunisasi }}</li>
+                                        @endforeach
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    @foreach ($kasus->imunisasis as $imunisasi)
+                                        <li>{{ Carbon\Carbon::parse($imunisasi->tanggal_pemberi_imunisasi)->isoFormat('LL') }}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
+                            <td class="text-nowrap">
+                                <ul>
+                                    @foreach ($kasus->imunisasis as $imunisasi)
+                                        <li>{{ $imunisasi->puskes_pemberi->nama_instansi }}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
                         </tr>
                         @empty
                         <tr class="text-center">
@@ -98,6 +131,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $dataKeluhan->links() }}
         </div>
     </div>
 </div>

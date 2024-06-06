@@ -12,7 +12,7 @@
                 Pengaduan Saya
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="dashboard-personal-info.html">
                 <img src="{{ asset('assets/home/images/icon/dashboard-menu-3.png') }}" class="max-un" alt="icon">
                 Personal Information
@@ -23,6 +23,6 @@
                 <img src="{{ asset('assets/home/images/icon/dashboard-menu-6.png') }}" class="max-un" alt="icon">
                 Change password
             </a>
-        </li>
+        </li> --}}
     </ul>
 </div>

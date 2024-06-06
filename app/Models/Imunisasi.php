@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Imunisasi extends Model
 {
     use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $table = 'imunisasis';
 
@@ -35,6 +36,16 @@ class Imunisasi extends Model
     {
         return $this->belongsTo(Kunjungan::class);
     }
+
+    public function kasus()
+    {
+        return $this->belongsToThrough(Kasus::class, Kunjungan::class, foreignKeyLookup: [Kasus::class => 'kasus_id']);
+    }
+
+    // public function kasus()
+    // {
+    //     return $this->hasManyThrough(Kunjungan::class, Kasus::class, 'id', 'kunjungan_id', )
+    // }
 
     public function puskes_pemberi()
     {

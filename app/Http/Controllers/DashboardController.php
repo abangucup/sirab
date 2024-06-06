@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Imunisasi;
 use App\Models\Instansi;
 use App\Models\JadwalPelayanan;
+use App\Models\Kasus;
 use App\Models\Kunjungan;
 use App\Models\Pasien;
 use App\Models\Pengaduan;
@@ -73,9 +74,11 @@ class DashboardController extends Controller
     {
         $pasien = Auth::user()->biodata->pasien;
         $kunjungans = Kunjungan::where('pasien_id', $pasien->id)->get();
-        $imunisasis = Imunisasi::whereHas('kunjungan', function($query) use ($pasien) {   
-                                    $query->where('pasien_id', $pasien->id);
-                                })->get();
-        return view('home.dashboard.index', compact('kunjungans', 'imunisasis'));
+        // $imunisasis = Imunisasi::whereHas('kunjungan', function($query) use ($pasien) {   
+        //                             $query->where('pasien_id', $pasien->id);
+        //                         })->Paginate(4);
+        $dataKeluhan = Kasus::where('pasien_id', $pasien->id)
+                            ->paginate(5);
+        return view('home.dashboard.index', compact('kunjungans', 'dataKeluhan'));
     }
 }

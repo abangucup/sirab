@@ -7,10 +7,13 @@ use App\Models\Instansi;
 use App\Models\Kasus;
 use App\Models\Kunjungan;
 use App\Models\Pasien;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Doctrine\Inflector\Rules\Ruleset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class KunjunganController extends Controller
 {
@@ -93,8 +96,13 @@ class KunjunganController extends Controller
 
     public function edit(Kunjungan $kunjungan)
     {
-        $instansi = Instansi::where('status', 'puskesmas')->where('id', Auth::user()->petugas->instansi_id)->first();
-        $pasiens = Pasien::latest()->get();
+        if (auth()->user()->role->level_role == 'super_admin') {
+            $instansi = Instansi::all();
+        } else {
+
+            $instansi = Instansi::where('status', 'puskesmas')->where('id', Auth::user()->petugas->instansi_id)->first();
+        }
+            $pasiens = Pasien::latest()->get();
         return view('kunjungan.edit_kunjungan', compact('kunjungan', 'pasiens', 'instansi'));
     }
 
@@ -134,5 +142,12 @@ class KunjunganController extends Controller
         } else {
             return redirect()->route('kunjungan.show', ['kunjungan' => $kunjungan->id])->withToastError('Hapus data imunisasi dahulu pada kunjungan ini');
         }
+    }
+
+    public function kartuImunisasi(Kunjungan $kunjungan)
+    {
+        $pdf = Pdf::loadView('kunjungan.imunisasi.kartu_imunisasi', compact('kunjungan'))
+            ->setPaper('A4', 'potrait');
+        return $pdf->stream('kartu-imunisasi - ' . $kunjungan->pasien->nomor_register . ' - ' . Str::slug($kunjungan->pasien->biodata->nama_lengkap) . '.pdf');
     }
 }

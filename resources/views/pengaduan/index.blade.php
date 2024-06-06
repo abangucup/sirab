@@ -57,9 +57,9 @@
                                                 <a href="{{ route('pengaduan.show', $pengaduan->id) }}" class="btn btn-outline-info">
                                                     <i class="ft-info"></i>
                                                 </a>
-                                                <button class="btn btn-outline-danger mx-1" data-toggle="modal"
+                                                {{-- <button class="btn btn-outline-danger mx-1" data-toggle="modal"
                                                     data-target="#modalHapus-{{ $pengaduan->id }}"><i
-                                                        class="ft-trash-2"></i></button>
+                                                        class="ft-trash-2"></i></button> --}}
                                             </div>
                                         </td>
                                     </tr>
