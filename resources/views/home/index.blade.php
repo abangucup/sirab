@@ -55,7 +55,7 @@
                                 <p class="mdr">#{{ $pasien->nomor_register }}</p>
                                 <h5>{{ $pasien->biodata->nama_lengkap }}</h5>
                             </div>
-                            <a href="register.html" class="cmn-btn">Detail</a>
+                            <a href="{{ route('detailPasien', $pasien->nomor_register) }}" target="_blank" class="cmn-btn">Detail</a>
                         </div>
                     </div>
                     @endforeach

@@ -29,6 +29,10 @@ Route::get('/list-jadwal-pelayanan', [HomeController::class, 'listJadwal'])->nam
 Route::get('/list-pengaduan', [HomeController::class, 'listPengaduan'])->name('list.pengaduan');
 Route::post('/list-pengaduan', [HomeController::class, 'storePengaduan']);
 
+ // DETAIL PASIEN
+// Route::get('kunjungan/{kunjungan}/kartu-imunisasi', [KunjunganController::class, 'kartuImunisasi'])->name('kartuImunisasi');
+Route::get('/kartu-pasien/{nomor_register}', [HomeController::class, 'detailPasien'])->name('detailPasien');
+
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'storeLogin']);
