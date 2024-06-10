@@ -8,6 +8,8 @@
 </head>
 
 <body style="font-size: 12px">
+    @foreach ($pasien->kunjungans as $kunjungan)
+
     <table width="100%">
         <tr>
             <td align="left">
@@ -48,10 +50,9 @@
         <!-- Tambahkan tabel riwayat vaksinasi di sini -->
     </div> --}}
 
-    @foreach ($pasien->kunjungans as $kunjungan)
 
     <h1>DETAIL IMUNISASI PASIEN KUNJUNGAN KE - {{ $loop->iteration }}</h1>
-        
+
     <table width="100%" style="border: 1px solid black; padding: 5px">
         <tbody>
             <tr>
@@ -156,8 +157,8 @@
         </table>
     </div>
 
-    @endforeach
 
 </body>
+@endforeach
 
 </html>
