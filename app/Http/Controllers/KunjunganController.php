@@ -60,7 +60,6 @@ class KunjunganController extends Controller
 
         $pasien = Pasien::findOrFail($request->pasien);
         $kasus = Kasus::findOrFail($request->kasus);
-        dd($pasien);
 
         $kunjungan = new Kunjungan();
         $kunjungan->pasien_id = $pasien->id;
