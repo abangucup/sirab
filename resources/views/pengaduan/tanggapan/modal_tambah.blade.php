@@ -18,6 +18,14 @@
                         <label for="tanggal_pemberian">Tanggapan</label>
                         <textarea name="tanggapan" rows="3" class="form-control" placeholder="Masukan tanggapan anda"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="status">Status <span class="text-danger">*</span></label>
+                        <select name="status" id="status" class="form-control form-select" required>
+                            <option value="">-- Pilih Status Pengaduan --</option>
+                            <option value="proses">Proses</option>
+                            <option value="selesai">Selesai</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="reset" data-dismiss="modal" class="btn btn-secondary">Tutup</button>

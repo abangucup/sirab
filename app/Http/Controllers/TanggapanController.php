@@ -15,6 +15,7 @@ class TanggapanController extends Controller
         $validasi = Validator::make($request->all(), [
             'tanggapan' => 'required',
             'pengaduan_id' => 'required',
+            'status' => 'required',
         ]);
 
         if ($validasi->fails()) {
@@ -24,12 +25,12 @@ class TanggapanController extends Controller
         $tanggapan = new Tanggapan();
         $tanggapan->pengaduan_id = $request->pengaduan_id;
         $tanggapan->tanggapan = $request->tanggapan;
-        $tanggapan->petugas_id = Auth::user()->id;
+        $tanggapan->petugas_id = Auth::user()->petugas->id;
         $tanggapan->save();
 
         $pengaduan = Pengaduan::where('id', $request->pengaduan_id)->first();
         $pengaduan->update([
-            'status' => 'proses'
+            'status' => $request->status
         ]);
 
         return redirect()->back()->withToastSuccess('Tanggapan dikirim');
