@@ -74,7 +74,7 @@
 
       {{-- Role Admin --}}
       @if ($user->role->level_role === 'super_admin')
-      <li class="nav-item has-sub"><a href="#"><i class="ft-map"></i><span class="menu-title"
+      {{-- <li class="nav-item has-sub"><a href="#"><i class="ft-map"></i><span class="menu-title"
             data-i18n="">Wilayah</span></a>
         <ul class="menu-content" style="">
           <li class="is-shown {{ Request::is('*/wilayah/provinsi') ? 'active' : '' }}">
@@ -87,7 +87,7 @@
             <a class="menu-item" href="{{ route('kecamatan.index') }}">Kecamatan</a>
           </li>
         </ul>
-      </li>
+      </li> --}}
       <li class="{{ Request::is('*/instansi') ? 'open' : '' }} nav-item"><a href="{{ route('instansi.index') }}"><i
             class="ft-briefcase"></i><span class="menu-title" data-i18n="">Instansi</span></a>
       </li>

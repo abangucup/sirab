@@ -87,44 +87,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-xl-3 col-lg-6 col-12">
-                                <a href="{{ route('jadwal.index') }}">
-                                    <div class="card bg-gradient-x-orange-yellow">
-                                        <div class="card-content">
-                                            <div class="card-body">
-                                                <div class="media d-flex">
-                                                    <div class="align-self-top">
-                                                        <i class="ft-monitor text-white font-large-5"></i>
-                                                    </div>
-                                                    <div class="media-body text-white text-right align-self-center">
-                                                        <span class="d-block mb-1 font-medium-1">Total Jadwal Pelayanan</span>
-                                                        <h1 class="text-white mb-0">10</h1>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-12">
-                                <a href="{{ route('pengaduan.index') }}">
-                                    <div class="card bg-gradient-directional-success">
-                                        <div class="card-content">
-                                            <div class="card-body">
-                                                <div class="media d-flex">
-                                                    <div class="align-self-top">
-                                                        <i class="ft-monitor text-white font-large-5"></i>
-                                                    </div>
-                                                    <div class="media-body text-white text-right align-self-center">
-                                                        <span class="d-block mb-1 font-medium-1">Total Pengaduan</span>
-                                                        <h1 class="text-white mb-0">10</h1>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

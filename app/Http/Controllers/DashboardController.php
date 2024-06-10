@@ -62,6 +62,7 @@ class DashboardController extends Controller
         $totalPetugas = Petugas::where('instansi_id', Auth::user()->petugas->instansi_id)->count();
         $totalPengaduan = Pengaduan::count();
         $totalPasien = Pasien::count();
+        
         return view('halaman_puskes.dashboard', compact([
             'totalJadwal',
             'totalPetugas',
