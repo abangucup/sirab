@@ -157,8 +157,7 @@
         </table>
     </div>
 
-
-</body>
 @endforeach
+</body>
 
 </html>
