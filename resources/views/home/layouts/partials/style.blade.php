@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('assets/home/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/home/css/fontawesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/home/css/jquery-ui.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/home/css/plugin/nice-select.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('assets/home/css/plugin/nice-select.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('assets/home/css/plugin/magnific-popup.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/home/css/plugin/slick.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/home/css/plugin/ion.rangeSlider.min.css') }}">

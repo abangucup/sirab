@@ -6,7 +6,7 @@
 <script src="{{ asset('assets/home/js/plugin/slick.js') }}"></script>
 <script src="{{ asset('assets/home/js/plugin/ion.rangeSlider.min.js') }}"></script>
 <script src="{{ asset('assets/home/js/plugin/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/home/js/plugin/jquery.nice-select.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/home/js/plugin/jquery.nice-select.min.js') }}"></script> --}}
 <script src="{{ asset('assets/home/js/plugin/counter.js') }}"></script>
 <script src="{{ asset('assets/home/js/plugin/jquery.downCount.js') }}"></script>
 <script src="{{ asset('assets/home/js/plugin/waypoint.min.js') }}"></script>

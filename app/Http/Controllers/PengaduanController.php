@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biodata;
+use App\Models\Pasien;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -68,11 +70,32 @@ class PengaduanController extends Controller
             }
             $biodata->save();
 
+            // MENGHITUNG DATA
+            $pasienCount = Pasien::count();
+            $serialNumber = str_pad($pasienCount + 1, 4, '0', STR_PAD_LEFT);
+
+            // Tanggal hari ini
+            $currentDate = Carbon::now()->format('dM');
+            $year = Carbon::now()->format('Y');
+
+            // Inisial nama pasien
+            $nameParts = explode(' ', $biodata->nama_lengkap);
+            $initials = '';
+            foreach ($nameParts as $part) {
+                $initials .= strtoupper(substr($part, 0, 1));
+            }
+            $no_register = $serialNumber . '-' . $currentDate . $year . '-' . $initials;
+
+            $pasien = new Pasien();
+            $pasien->biodata_id = $biodata->id;
+            $pasien->nomor_register = $no_register;
+            $pasien->save();
+            
             $user = new User();
             $user->biodata_id = $biodata->id;
-            $user->role_id = '5';
-            $user->username = $biodata->telepon;
-            $user->password = Hash::make('password');
+            $user->role_id = 5;
+            $user->username = $no_register;
+            $user->password = Hash::make($no_register);
             $user->save();
 
             $pengaduan = new Pengaduan();
@@ -81,6 +104,10 @@ class PengaduanController extends Controller
             $pengaduan->isi_pengaduan = $request->isi_pengaduan;
             $pengaduan->status = 'pending';
             $pengaduan->save();
+
+            Alert::toast('Username "' . $user->username . '" & Password "' . $user->username . '"', 'success');
+            Auth::login($user);
+            return redirect()->route('pengaduan.saya');
         } else {
             $user = Auth::user();
             $pengaduan = new Pengaduan();
@@ -89,11 +116,9 @@ class PengaduanController extends Controller
             $pengaduan->isi_pengaduan = $request->isi_pengaduan;
             $pengaduan->status = 'pending';
             $pengaduan->save();
+            Alert::toast('Berhasil mengirim pengaduan', 'success');
+            return redirect()->route('pengaduan.saya');
         }
-
-        Alert::toast('Berhasil mengirim pengaduan', 'success');
-        Auth::login($user);
-        return redirect()->route('pengaduan.saya');
     }
 
     public function update(Request $request, Pengaduan $pengaduan)

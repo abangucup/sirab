@@ -8,7 +8,7 @@
 </head>
 
 <body style="font-size: 12px">
-    @foreach ($pasien->kunjungans as $kunjungan)
+    @forelse ($pasien->kunjungans as $kunjungan)
 
     <table width="100%">
         <tr>
@@ -34,22 +34,6 @@
     </table>
 
     <hr>
-
-
-
-    {{-- <div class="container">
-        <div class="info-section">
-            <p><span class="label">No. Tiket:</span> RU-01W38DO</p>
-            <p><span class="label">Nama Lengkap:</span> IWAN SUNE</p>
-            <p><span class="label">Tanggal Lahir:</span> 1973-10-30</p>
-            <p><span class="label">No HP:</span> 085291114441</p>
-            <p><span class="label">Alamat:</span> Jl. pertama</p>
-            <p><span class="label">Lokasi Menerima:</span> Dinas Kesehatan Kota Gorontalo - NO000723</p>
-        </div>
-        <h2>Riwayat Pemberian Vaksin Covid-19</h2>
-        <!-- Tambahkan tabel riwayat vaksinasi di sini -->
-    </div> --}}
-
 
     <h1>DETAIL IMUNISASI PASIEN KUNJUNGAN KE - {{ $loop->iteration }}</h1>
 
@@ -156,8 +140,37 @@
             </tr>
         </table>
     </div>
+    @empty
+    <table width="100%">
+        <tr>
+            <td align="left">
+                <img width="90px" src="assets/images/logo/png/logo_kota.png" height="100px">
+            </td>
+            <td style="text-align: center" width="100%">
+                <p style="font-size: 2.2em"><b>
+                        PEMERINTAH KOTA GORONTALO <br>
+                        DINAS KESEHATAN
+                </p>
+                <p>
+                    Jl. Jamaludin Malik No. 52, Kelurahan Limba U Dua, Kecamatan Kota Selatan, Kota Gorontalo<br>
+                    Kode Pos 96138 <i>Email : <a href="">p2pl.dinkeskota.gorontalo@gmail.com</a> Website : <a
+                            href="">https://sirab.manyta.net</a></u></i>
+                </p>
+            </td>
+            <td align="right" width="100px">
+                <img width="90px" src="assets/images/logo/png/logo_kesehatan.png" height="100px">
 
-@endforeach
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h1>BELUM ADA DATA IMUNISAI</h1>
+    <br><br><br><br>
+    <h1>Silahkan ke puskesmas terdekat untuk melakukan kunjungan dan pemeriksaan kondisi yang anda alami jika anda tergigit hewan rabies</h1>
+
+    @endforelse
 </body>
 
 </html>
