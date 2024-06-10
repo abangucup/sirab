@@ -20,6 +20,8 @@ class KunjunganController extends Controller
     public function index()
     {
         $kunjungans = Kunjungan::latest()->get();
+        // dd($kunjungans);
+
         return view('kunjungan.index', compact('kunjungans'));
     }
 
@@ -58,6 +60,7 @@ class KunjunganController extends Controller
 
         $pasien = Pasien::findOrFail($request->pasien);
         $kasus = Kasus::findOrFail($request->kasus);
+        dd($pasien);
 
         $kunjungan = new Kunjungan();
         $kunjungan->pasien_id = $pasien->id;
@@ -102,7 +105,7 @@ class KunjunganController extends Controller
 
             $instansi = Instansi::where('status', 'puskesmas')->where('id', Auth::user()->petugas->instansi_id)->first();
         }
-            $pasiens = Pasien::latest()->get();
+        $pasiens = Pasien::latest()->get();
         return view('kunjungan.edit_kunjungan', compact('kunjungan', 'pasiens', 'instansi'));
     }
 
