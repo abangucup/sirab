@@ -11,6 +11,7 @@ use App\Http\Controllers\KabkotController;
 use App\Http\Controllers\KasusController;
 use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KunjunganController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PenggunaController;
@@ -100,6 +101,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pasien', [DashboardController::class, 'pasien'])->name('dashboard.pasien');
         Route::get('/pengaduan-saya', [HomeController::class, 'pengaduanSaya'])->name('pengaduan.saya');
     });
+    
+    Route::get('laporan/imunisasi', [LaporanController::class, 'imunisasi'])->name('laporanImunisasi');
+    Route::get('laporan/pemeriksaan', [LaporanController::class, 'pemeriksaan'])->name('laporanPemeriksaan');
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

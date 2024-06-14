@@ -48,7 +48,8 @@
       </li>
 
       {{-- IMUNISASI --}}
-      <li class="nav-item has-sub"><a href="#"><i class="ft-thermometer"></i><span class="menu-title" data-i18n="">Imunisasi</span></a>
+      <li class="nav-item has-sub"><a href="#"><i class="ft-thermometer"></i><span class="menu-title"
+            data-i18n="">Imunisasi</span></a>
         <ul class="menu-content" style="">
           <li class="is-shown {{ Request::is('kunjungan') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('kunjungan.index') }}">Data Kunjungan</a>
@@ -63,11 +64,11 @@
       <li class="nav-item has-sub"><a href="#"><i class="ft-file-text"></i><span class="menu-title"
             data-i18n="">Laporan</span></a>
         <ul class="menu-content" style="">
-          <li class="is-shown {{ Request::is('*/wilayah/provinsi') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('provinsi.index') }}">Imunisasi</a>
+          <li class="is-shown {{ Request::is('*/laporan/imunisasi') ? 'active' : '' }}">
+            <a class="menu-item" href="{{ route('laporanImunisasi') }}">Imunisasi</a>
           </li>
-          <li class="is-shown {{ Request::is('*/wilayah/kabkot') ? 'active' : '' }}">
-            <a class="menu-item" href="{{ route('kabkot.index') }}">Pemeriksaan</a>
+          <li class="is-shown {{ Request::is('*/laporan/pemeriksaan') ? 'active' : '' }}">
+            <a class="menu-item" href="{{ route('laporanPemeriksaan') }}">Pemeriksaan</a>
           </li>
         </ul>
       </li>
