@@ -99,12 +99,12 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($kunjungans as $kunjungan)
-                                    @php
+                                    {{-- @php
                                     $imunisasiData = $kunjungan->imunisasis->groupBy('status_imunisasi')
                                     ->map(function($items) {
                                     return $items->first();
                                     });
-                                    @endphp
+                                    @endphp --}}
                                     <tr class="text-center">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kunjungan->puskes_kunjungan->nama_instansi }}</td>
@@ -135,7 +135,7 @@
                                             'disabled' }}></td>
 
                                         {{-- IMUNISASI --}}
-                                        <td class="text-nowrap">{{ isset($imunisasiData['Var 1']) ?
+                                        {{-- <td class="text-nowrap">{{ isset($imunisasiData['Var 1']) ?
                                             \Carbon\Carbon::parse($imunisasiData['Var
                                             1']->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
                                         <td class="text-nowrap">{{ isset($imunisasiData['Var 2']) ?
@@ -146,7 +146,16 @@
                                             3']->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
                                         <td class="text-nowrap">{{ isset($imunisasiData['Var 4']) ?
                                             \Carbon\Carbon::parse($imunisasiData['Var
-                                            4']->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
+                                            4']->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td> --}}
+
+                                        <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi', 'Var 1')->first() ?
+                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi', 'Var 1')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
+                                        <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi', 'Var 2')->first() ?
+                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi', 'Var 2')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
+                                            <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi', 'Var 3')->first() ?
+                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi', 'Var 3')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
+                                            <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi', 'Var 4')->first() ?
+                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi', 'Var 4')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
 
                                         <td><input type="checkbox" {{ $kunjungan->kasus->kondisi == 'Sembuh' ? 'checked'
                                             : 'disabled' }}></td>
