@@ -64,10 +64,10 @@
       <li class="nav-item has-sub"><a href="#"><i class="ft-file-text"></i><span class="menu-title"
             data-i18n="">Laporan</span></a>
         <ul class="menu-content" style="">
-          <li class="is-shown {{ Request::is('*/laporan/imunisasi') ? 'active' : '' }}">
+          <li class="is-shown {{ Request::is('laporan/imunisasi') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('laporanImunisasi') }}">Imunisasi</a>
           </li>
-          <li class="is-shown {{ Request::is('*/laporan/pemeriksaan') ? 'active' : '' }}">
+          <li class="is-shown {{ Request::is('laporan/pemeriksaan') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('laporanPemeriksaan') }}">Pemeriksaan</a>
           </li>
         </ul>

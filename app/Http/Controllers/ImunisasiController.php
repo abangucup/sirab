@@ -22,7 +22,7 @@ class ImunisasiController extends Controller
             return redirect()->back()->withToastError('Lengkapi data inputan');
         }
 
-        $cekStatusImunisasi = Imunisasi::where('status_imunisasi', $request->status_imunisasi)->first();
+        $cekStatusImunisasi = Imunisasi::where('status_imunisasi', $request->status_imunisasi)->where('kunjungan_id', $kunjungan->id)->first();
 
         if ($cekStatusImunisasi) {
             return redirect()->back()->withToastError('Status imunisasi ini sudah ada.');
@@ -53,10 +53,11 @@ class ImunisasiController extends Controller
 
         $cekStatusImunisasi = Imunisasi::where('status_imunisasi', $request->status_imunisasi)
             ->where('id', '!=', $imunisasi->id)
+            ->where('kunjungan_id', $kunjungan->id)
             ->first();
 
         if ($cekStatusImunisasi) {
-            return redirect()->back()->withToastSuccess('Status imunisasi ini sudah ada');
+            return redirect()->back()->withToastError('Status imunisasi ini sudah ada');
         }
 
         if (!$kunjungan) {
