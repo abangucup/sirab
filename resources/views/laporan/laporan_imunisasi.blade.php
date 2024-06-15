@@ -22,44 +22,15 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body card-dashboard">
-                        <p class="card-text">Data Laporan Imunisasi By Name By Address Per Puskesmas</p>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered complex-headers">
-                                {{-- <thead>
-                                    <tr>
-                                        <th rowspan="2" class="align-middle">Name</th>
-                                        <th colspan="2">HR Information</th>
-                                        <th colspan="3">Contact</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Position</th>
-                                        <th>Salary</th>
-                                        <th>Office</th>
-                                        <th>Extn.</th>
-                                        <th>E-mail</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>$320,800</td>
-                                        <td>Edinburgh</td>
-                                        <td>5421</td>
-                                        <td>t.nixon@datatables.net</td>
-                                    </tr>
+                        <div class="d-flex justify-content-between">
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Salary</th>
-                                        <th>Office</th>
-                                        <th>Extn.</th>
-                                        <th>E-mail</th>
-                                    </tr>
-                                </tfoot> --}}
+                            <p class="card-text">Data Laporan Imunisasi By Name By Address Per Puskesmas</p>
+                            <div>
+                                <button class="btn btn-info" onclick="downloadImage()"> <i class="ft-download mr-2"></i>Download</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive" id="table-container">
+                            <table class="table table-striped table-bordered complex-headers" id="table-to-download">
                                 <thead class="bg-info text-white">
                                     <tr>
                                         <th rowspan="3" class="align-middle">No</th>
@@ -71,7 +42,7 @@
                                         <th class="text-nowrap text-center" colspan="4">Jenis Hewan Penular</th>
                                         <th rowspan="3" class="align-middle">Lokasi Gigitan</th>
                                         <th colspan="5" class="text-center">Pengobatan</th>
-                                        <th colspan="2" class="text-center">Kondisi</th>
+                                        <th colspan="3" class="text-center">Kondisi</th>
                                         <th colspan="2" class="text-center">Pemb. Lab Rabies</th>
                                     </tr>
                                     <tr>
@@ -85,6 +56,7 @@
                                         <th rowspan="2" class="align-middle">Dll</th>
                                         <th rowspan="2" class="align-middle">Cuci Luka</th>
                                         <th colspan="4" class="text-center">Tanggal Pemberian</th>
+                                        <th rowspan="2" class="align-middle">Sakit</th>
                                         <th rowspan="2" class="align-middle">Sembuh</th>
                                         <th rowspan="2" class="align-middle">Mati</th>
                                         <th rowspan="2" class="align-middle">POS</th>
@@ -99,12 +71,6 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($kunjungans as $kunjungan)
-                                    {{-- @php
-                                    $imunisasiData = $kunjungan->imunisasis->groupBy('status_imunisasi')
-                                    ->map(function($items) {
-                                    return $items->first();
-                                    });
-                                    @endphp --}}
                                     <tr class="text-center">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $kunjungan->puskes_kunjungan->nama_instansi }}</td>
@@ -123,7 +89,8 @@
                                             \Carbon\Carbon::parse($kunjungan->tanggal_berkunjung)->isoFormat('LL') }}
                                         </td>
                                         <td><input type="checkbox" {{ $kunjungan->kasus->hewan_rabies == 'Anjing' ?
-                                            'checked' : 'disabled' }}></td>
+                                            'checked' : 'disabled' }} onclick="return {{ $kunjungan->kasus->hewan_rabies
+                                            == 'Anjing' ? false : true }};"></td>
                                         <td><input type="checkbox" {{ $kunjungan->kasus->hewan_rabies == 'Kucing' ?
                                             'checked' : 'disabled' }}></td>
                                         <td><input type="checkbox" {{ $kunjungan->kasus->hewan_rabies == 'Kera' ?
@@ -135,28 +102,29 @@
                                             'disabled' }}></td>
 
                                         {{-- IMUNISASI --}}
-                                        {{-- <td class="text-nowrap">{{ isset($imunisasiData['Var 1']) ?
-                                            \Carbon\Carbon::parse($imunisasiData['Var
-                                            1']->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
-                                        <td class="text-nowrap">{{ isset($imunisasiData['Var 2']) ?
-                                            \Carbon\Carbon::parse($imunisasiData['Var
-                                            2']->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
-                                        <td class="text-nowrap">{{ isset($imunisasiData['Var 3']) ?
-                                            \Carbon\Carbon::parse($imunisasiData['Var
-                                            3']->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
-                                        <td class="text-nowrap">{{ isset($imunisasiData['Var 4']) ?
-                                            \Carbon\Carbon::parse($imunisasiData['Var
-                                            4']->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td> --}}
+                                        <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi',
+                                            'Var 1')->first() ?
+                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi',
+                                            'Var 1')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}
+                                        </td>
+                                        <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi',
+                                            'Var 2')->first() ?
+                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi',
+                                            'Var 2')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}
+                                        </td>
+                                        <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi',
+                                            'Var 3')->first() ?
+                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi',
+                                            'Var 3')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}
+                                        </td>
+                                        <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi',
+                                            'Var 4')->first() ?
+                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi',
+                                            'Var 4')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}
+                                        </td>
 
-                                        <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi', 'Var 1')->first() ?
-                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi', 'Var 1')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
-                                        <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi', 'Var 2')->first() ?
-                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi', 'Var 2')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
-                                            <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi', 'Var 3')->first() ?
-                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi', 'Var 3')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
-                                            <td class="text-nowrap">{{ $kunjungan->imunisasis()->where('status_imunisasi', 'Var 4')->first() ?
-                                            \Carbon\Carbon::parse($kunjungan->imunisasis()->where('status_imunisasi', 'Var 4')->first()->tanggal_pemberian_imunisasi)->isoFormat('LL') : '' }}</td>
-
+                                        <td><input type="checkbox" {{ $kunjungan->kasus->kondisi == 'Sakit' ? 'checked'
+                                        : 'disabled' }}></td>
                                         <td><input type="checkbox" {{ $kunjungan->kasus->kondisi == 'Sembuh' ? 'checked'
                                             : 'disabled' }}></td>
                                         <td><input type="checkbox" {{ $kunjungan->kasus->kondisi == 'Mati' ? 'checked' :
@@ -177,7 +145,7 @@
                                         <th colspan="4">Jenis Hewan Penular</th>
                                         <th>Lokasi Gigitan</th>
                                         <th colspan="5">Pengobatan</th>
-                                        <th colspan="2">Kondisi</th>
+                                        <th colspan="3">Kondisi</th>
                                         <th colspan="2">Pemb. Lab Rabies</th>
                                     </tr>
                                 </tfooot>
@@ -190,3 +158,23 @@
     </div>
 </section>
 @endsection
+
+@push('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+    async function downloadImage() {
+        const tableContainer = document.getElementById('table-container');
+        const currentDate = "<?php echo date('d-m-Y'); ?>";
+
+        const originalWidth = tableContainer.style.width;
+        tableContainer.style.width = tableContainer.scrollWidth + 'px';
+        const canvas = await html2canvas(tableContainer, { scale: 2 });
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'laporan-imunisasi-'+ currentDate + '.png';
+        link.click();
+        tableContainer.style.width = originalWidth;  // Restore original width
+    }
+</script>
+@endpush

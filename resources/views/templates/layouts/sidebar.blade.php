@@ -67,9 +67,9 @@
           <li class="is-shown {{ Request::is('laporan/imunisasi') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('laporanImunisasi') }}">Imunisasi</a>
           </li>
-          <li class="is-shown {{ Request::is('laporan/pemeriksaan') ? 'active' : '' }}">
+          {{-- <li class="is-shown {{ Request::is('laporan/pemeriksaan') ? 'active' : '' }}">
             <a class="menu-item" href="{{ route('laporanPemeriksaan') }}">Pemeriksaan</a>
-          </li>
+          </li> --}}
         </ul>
       </li>
 
