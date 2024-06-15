@@ -163,18 +163,56 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
+    // async function downloadImage() {
+    //     const tableContainer = document.getElementById('table-container');
+    //     const currentDate = "<?php echo date('d-m-Y'); ?>";
+
+    //     const originalWidth = tableContainer.style.width;
+    //     tableContainer.style.width = tableContainer.scrollWidth + 'px';
+    //     const canvas = await html2canvas(tableContainer, { scale: 2 });
+    //     const link = document.createElement('a');
+    //     link.href = canvas.toDataURL('image/png');
+    //     link.download = 'laporan-imunisasi-'+ currentDate + '.png';
+    //     link.click();
+    //     tableContainer.style.width = originalWidth;  // Restore original width
+    // }
     async function downloadImage() {
         const tableContainer = document.getElementById('table-container');
         const currentDate = "<?php echo date('d-m-Y'); ?>";
-
+        
+        // Simpan lebar asli dan atur lebar untuk menangkap gambar
         const originalWidth = tableContainer.style.width;
         tableContainer.style.width = tableContainer.scrollWidth + 'px';
+
+        // Buat gambar menggunakan html2canvas
         const canvas = await html2canvas(tableContainer, { scale: 2 });
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'laporan-imunisasi-'+ currentDate + '.png';
-        link.click();
-        tableContainer.style.width = originalWidth;  // Restore original width
+
+        // Buat elemen baru untuk menambahkan teks sebagai gambar
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+        const ctx = tempCanvas.getContext('2d');
+
+        // Gambarkan gambar asli ke tempCanvas
+        ctx.drawImage(canvas, 0, 0);
+
+        // Tambahkan teks sebagai elemen <h1>
+        ctx.font = '60px Arial'; // Atur ukuran font dan jenisnya
+        ctx.fillStyle = 'black'; // Atur warna teks
+        ctx.textAlign = 'center'; // Pusatkan teks
+        ctx.fillText('Laporan Imunisasi Var Rabies', tempCanvas.width / 2, 40); // Tambahkan teks di atas gambar
+
+        // Unduh hasilnya sebagai gambar PNG
+        tempCanvas.toBlob((blob) => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'laporan-imunisasi-'+ currentDate + '.png';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        });
+
+        // Kembalikan lebar asli
+        tableContainer.style.width = originalWidth;
     }
 </script>
 @endpush
